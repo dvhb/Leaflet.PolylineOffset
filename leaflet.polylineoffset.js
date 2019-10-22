@@ -180,6 +180,16 @@ var PolylineOffset = {
         points.push(translatePoint(center, distance, endAngle));
 
         return rightOffset ? points.reverse() : points;
+    },
+
+    getMetersPerPixel: function(map) {
+        var centerLatLng = map.getCenter(); // get map center
+        var pointC = map.latLngToContainerPoint(centerLatLng); // convert to containerpoint (pixels)
+        var pointX = L.point(pointC.x + 10, pointC.y); // add 10 pixels to x
+
+        // convert containerpoints to latlng's
+        var latLngX = map.containerPointToLatLng(pointX);
+        return centerLatLng.distanceTo(latLngX) / 10; // calculate distance between c and x (latitude)
     }
 }
 
@@ -199,7 +209,8 @@ L.Polyline.include({
 
             // Offset management hack ---
             if (this.options.offset) {
-                ring = L.PolylineOffset.offsetPoints(ring, this.options.offset);
+                var metersPerPixel = L.PolylineOffset.getMetersPerPixel(this.map);
+                ring = L.PolylineOffset.offsetPoints(ring, this.options.offset / metersPerPixel);
             }
             // Offset management hack END ---
 
