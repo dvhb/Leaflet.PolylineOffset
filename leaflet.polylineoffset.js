@@ -209,7 +209,7 @@ L.Polyline.include({
 
             // Offset management hack ---
             if (this.options.offset) {
-                var metersPerPixel = L.PolylineOffset.getMetersPerPixel(this.map);
+                var metersPerPixel = L.PolylineOffset.getMetersPerPixel(this._map);
                 ring = L.PolylineOffset.offsetPoints(ring, this.options.offset / metersPerPixel);
             }
             // Offset management hack END ---

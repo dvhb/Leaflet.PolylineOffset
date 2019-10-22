@@ -1,6 +1,6 @@
 {
   "name": "@dvhb/leaflet-polylineoffset",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Apply a relative offset in meters to polylines without changing their coordinates.",
   "main": "leaflet.polylineoffset.js",
   "directories": {
